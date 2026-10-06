@@ -1,2 +1,955 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stage bij TechNative | Python & Cloud Fundamentals</title>
+  <meta name="description" content="Stage-ervaring bij TechNative: Python-basis, Git, GitHub, Linux en praktische toepassingen in de cloud-wereld.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a1628;
+      --bg-card: #111d33;
+      --bg-card-hover: #162440;
+      --navy: #0d1b2a;
+      --navy-light: #1b2a4a;
+      --orange: #ff6b35;
+      --orange-soft: #ff8c5a;
+      --orange-glow: rgba(255, 107, 53, 0.25);
+      --blue-accent: #3b82f6;
+      --text: #e8eef7;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border: rgba(148, 163, 184, 0.12);
+      --code-bg: #0d1525;
+      --success: #22c55e;
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
 
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Hello from GitHub</title> </head> <body> <h1>Hello from GitHub!</h1> <p>Welcome to my GitHub Pages website.</p> </body> </html> 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(255, 107, 53, 0.06), transparent),
+        linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), #ff9f43);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #0a1628;
+      box-shadow: 0 0 20px var(--orange-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 107, 53, 0.12);
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 107, 53, 0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--orange), #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-card);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 3.5rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    /* ========== CARDS ========== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 107, 53, 0.3);
+      background: var(--bg-card-hover);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(255, 107, 53, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+    }
+
+    .card ul {
+      margin-top: 0.75rem;
+      padding-left: 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* ========== CODE BLOCKS ========== */
+    pre, .code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      color: #c9d4e8;
+      line-height: 1.55;
+      margin: 0.85rem 0;
+    }
+
+    .code-inline {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.82em;
+      background: rgba(255, 107, 53, 0.12);
+      color: var(--orange-soft);
+      padding: 0.15em 0.45em;
+      border-radius: 4px;
+    }
+
+    .keyword { color: #c792ea; }
+    .string { color: #c3e88d; }
+    .number { color: #f78c6c; }
+    .comment { color: #546e7a; }
+    .func { color: #82aaff; }
+
+    /* ========== CONTENT BLOCK ========== */
+    .content-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .content-block h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-block p {
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .content-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      margin-left: 0.4rem;
+    }
+
+    /* ========== STORY / ABOUT ========== */
+    .story {
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(59, 130, 246, 0.06));
+      border: 1px solid rgba(255, 107, 53, 0.2);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+
+    .story h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .story p {
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ========== REAL WORLD ========== */
+    .real-world {
+      border-left: 3px solid var(--orange);
+      padding-left: 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .real-world h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 0.4rem;
+    }
+
+    .real-world p {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+    }
+
+    /* ========== COMMAND LIST ========== */
+    .cmd-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .cmd-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      align-items: start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+    }
+
+    .cmd-item code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--orange);
+    }
+
+    .cmd-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    @media (max-width: 560px) {
+      .cmd-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+      }
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========== TOC ========== */
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .toc a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--orange);
+      border-color: rgba(255, 107, 53, 0.4);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding: 3.5rem 0 2.5rem;
+      }
+      section {
+        padding: 2.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <span class="logo-icon">TN</span>
+        TechNative Stage
+      </a>
+      <ul class="nav-links">
+        <li><a href="#stage">Stage</a></li>
+        <li><a href="#variabelen">Variabelen</a></li>
+        <li><a href="#operators">Operators</a></li>
+        <li><a href="#control">Control flow</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#praktijk">Praktijk</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-badge">Stage · Python &amp; Cloud Fundamentals</div>
+      <h1>Programmeren leren<br>bij <span>TechNative</span></h1>
+      <p class="hero-sub">
+        Alles wat ik geleerd heb tijdens mijn stage bij TechNative:
+        variabelen, datatypes, operators, loops, Git, GitHub, Linux en hoe je dit in de echte wereld gebruikt.
+      </p>
+      <div class="hero-meta">
+        <span>📍 TechNative · Amersfoort</span>
+        <span>🐍 Python</span>
+        <span>☁️ Cloud &amp; Git</span>
+        <span>🎓 Stage-jathan</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- STAGE VERHAAL -->
+    <section id="stage">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Mijn stage</div>
+          <h2>Wat heb ik allemaal gedaan?</h2>
+          <p>Een korte terugblik op de eerste dagen bij TechNative.</p>
+        </div>
+
+        <div class="story">
+          <h3>Eerste dag bij TechNative</h3>
+          <p>
+            Ik ben voor mijn stage dinsdag naar TechNative geweest. Daar kreeg ik uitleg over wat ik in mijn stage moest doen en wat voor soort opdracht ik zou krijgen.
+          </p>
+          <p>
+            Ik kreeg de opdracht om eerst kennis te maken met <strong>GitHub</strong> en <strong>Termius</strong>.
+            GitHub is een platform waar je code en projecten kunt opslaan. Termius werkt met Amazon Linux:
+            via de terminal download je Git en verbind je met GitHub.
+          </p>
+          <p>
+            Toen we ingelogd waren, maakten we een repository aan met deze commands:
+          </p>
+          <pre><span class="comment"># Repository aanmaken en eerste commit</span>
+echo "# stage-jathan-" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:technative-university/stage-jathan-.git
+git push -u origin main</pre>
+          <p>
+            Daarna maakten we bestanden aan die via een website zichtbaar werden.
+            Het kostte veel tijd, maar uiteindelijk lukte het om alles uit te vogelen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SNELLE NAVIGATIE -->
+    <section style="padding-top: 0;">
+      <div class="container">
+        <div class="toc">
+          <a href="#variabelen">1. Variabelen</a>
+          <a href="#datatypes">2. Datatypes</a>
+          <a href="#operators">3. Operators</a>
+          <a href="#ifelse">4. If / Else</a>
+          <a href="#loops">5. Loops</a>
+          <a href="#comments">6. Comments</a>
+          <a href="#input">7. Input</a>
+          <a href="#print">8. Print</a>
+          <a href="#modules">9. Modules</a>
+          <a href="#indentation">10. Indentation</a>
+          <a href="#git">11. Git</a>
+          <a href="#github">12. GitHub</a>
+          <a href="#linux">13. Linux-commands</a>
+          <a href="#praktijk">Praktijkvoorbeelden</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. VARIABELEN -->
+    <section id="variabelen">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">01 · Basis</div>
+          <h2>Variabelen</h2>
+          <p>Een opslagplaats met een naam waarin je informatie bewaart.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>Wat is het?</h3>
+          <p>
+            Een variabele is een soort opslagplaats waarin je informatie kunt bewaren.
+            Je geeft deze opslagplaats een naam, zodat je de informatie later kunt gebruiken.
+          </p>
+          <h3 style="margin-top: 1.25rem;">Hoe hebben wij dit gebruikt?</h3>
+          <p>Bij onze rekenmachine gebruikten we variabelen om de getallen die de gebruiker invoert op te slaan.</p>
+          <pre><span class="keyword">getal_1</span> = <span class="number">5</span>
+<span class="keyword">getal_2</span> = <span class="number">10</span>
+<span class="comment"># hierdoor wordt getal_1 opgeslagen als 5 en getal_2 als 10</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DATATYPES -->
+    <section id="datatypes">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">02 · Basis</div>
+          <h2>Datatypes</h2>
+          <p>Datatypes geven aan wat voor soort waarde een variabele is.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🔢</div>
+            <h3>Integer</h3>
+            <p>Een heel getal, zonder decimalen.</p>
+            <pre>getal_1 = <span class="number">10</span></pre>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Voorbeeld: <span class="code-inline">x = 10</span> is een integer.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">📐</div>
+            <h3>Float</h3>
+            <p>Een getal met decimalen.</p>
+            <pre>getal_2 = <span class="number">10.5</span></pre>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Voorbeeld: <span class="code-inline">y = 11.5</span> is een float.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">📝</div>
+            <h3>String</h3>
+            <p>Tekst. Staat altijd tussen <span class="code-inline">''</span> of <span class="code-inline">""</span>.</p>
+            <pre>naam = <span class="string">'jathan'</span></pre>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Voorbeeld: <span class="code-inline">fruit = "apple"</span> is een string.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>List</h3>
+            <p>Een lijst waarin je meerdere waarden kunt opslaan.</p>
+            <pre>getallen = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">7</span>]
+<span class="comment"># a[0] = 1  → eerste element</span></pre>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Voorbeeld: <span class="code-inline">a = [1, 5]</span> is een list.</p>
+          </div>
+        </div>
+
+        <div class="content-block" style="margin-top: 1.25rem;">
+          <p>
+            Bij onze programma’s waren <strong>integers</strong> en <strong>floats</strong> vooral handig voor de rekenmachine,
+            en <strong>strings</strong> voor teksten en invoer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. OPERATORS -->
+    <section id="operators">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">03 · Rekenen</div>
+          <h2>Operators</h2>
+          <p>Tekens waarmee je kunt rekenen of dingen kunt vergelijken.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>+ Optellen</h3>
+            <pre>resultaat = <span class="number">5</span> + <span class="number">3</span>  <span class="comment"># 8</span></pre>
+          </div>
+          <div class="card">
+            <h3>- Aftrekken</h3>
+            <pre>resultaat = <span class="number">10</span> - <span class="number">4</span>  <span class="comment"># 6</span></pre>
+          </div>
+          <div class="card">
+            <h3>* Vermenigvuldigen</h3>
+            <pre>resultaat = <span class="number">6</span> * <span class="number">7</span>  <span class="comment"># 42</span></pre>
+          </div>
+          <div class="card">
+            <h3>/ Delen</h3>
+            <pre>resultaat = <span class="number">20</span> / <span class="number">4</span>  <span class="comment"># 5.0</span></pre>
+          </div>
+        </div>
+        <div class="content-block" style="margin-top: 1.25rem;">
+          <p>Bij onze rekenmachine hebben we operators veel gebruikt om berekeningen uit te voeren.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. IF / ELSE -->
+    <section id="ifelse">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">04 · Beslissingen</div>
+          <h2>Conditional statements (if / else)</h2>
+          <p>Met <span class="code-inline">if</span> en <span class="code-inline">else</span> kan de computer een beslissing maken.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>Voorbeeld bij ons gokspel</h3>
+          <pre><span class="keyword">if</span> gok == geheim_getal:
+    <span class="func">print</span>(<span class="string">'goed geraden'</span>)
+<span class="keyword">else</span>:
+    <span class="func">print</span>(<span class="string">'fout'</span>)</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. LOOPS -->
+    <section id="loops">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">05 · Herhalen</div>
+          <h2>Loops (while &amp; for)</h2>
+          <p>Een loop zorgt ervoor dat een stukje code meerdere keren wordt uitgevoerd.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🔁</div>
+            <h3>While-loop</h3>
+            <p>Blijft doorgaan zolang een bepaalde voorwaarde waar is.</p>
+            <pre><span class="keyword">while</span> gok != geheim_getal:
+    gok = <span class="func">int</span>(<span class="func">input</span>(<span class="string">'raad het getal: '</span>))</pre>
+            <p style="margin-top: 0.75rem;">Handig voor ons raadspel: je moet meestal vaker dan één keer raden.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔢</div>
+            <h3>For-loop</h3>
+            <p>Gebruik je wanneer je iets een bepaald aantal keer wilt uitvoeren of door een lijst wilt gaan.</p>
+            <pre><span class="keyword">for</span> getal <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]:
+    <span class="func">print</span>(getal)</pre>
+            <p style="margin-top: 0.75rem;">Of: <span class="code-inline">for i in [1, 5, 7, 3]: print(i)</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6–10 COMBINED -->
+    <section id="comments">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">06 – 10 · Extra basis</div>
+          <h2>Comments, input, print, modules &amp; indentation</h2>
+        </div>
+
+        <div class="card-grid">
+          <div class="card" id="comments-card">
+            <div class="card-icon">💬</div>
+            <h3>6. Comments</h3>
+            <p>Opmerkingen in je code die de computer niet uitvoert. Handig om uit te leggen wat er gebeurt.</p>
+            <pre><span class="comment"># dit vraagt de gebruiker om een getal</span></pre>
+          </div>
+
+          <div class="card" id="input">
+            <div class="card-icon">⌨️</div>
+            <h3>7. Input</h3>
+            <p>Met <span class="code-inline">input</span> kan de gebruiker iets invoeren.</p>
+            <pre>naam = <span class="func">input</span>(<span class="string">'wat is je naam? '</span>)
+getal_1 = <span class="func">input</span>(<span class="string">'geef het eerste getal: '</span>)</pre>
+            <p style="margin-top: 0.5rem;">Bij de rekenmachine gebruikten we dit om de getallen van de gebruiker te krijgen.</p>
+          </div>
+
+          <div class="card" id="print">
+            <div class="card-icon">🖥️</div>
+            <h3>8. Print</h3>
+            <p>Met <span class="code-inline">print</span> laat je iets zien op het scherm.</p>
+            <pre><span class="func">print</span>(<span class="string">'welkom bij de rekenmachine'</span>)</pre>
+            <p style="margin-top: 0.5rem;">We gebruikten dit om antwoorden en uitslagen van spellen te tonen.</p>
+          </div>
+
+          <div class="card" id="modules">
+            <div class="card-icon">📦</div>
+            <h3>9. Importing modules</h3>
+            <p>Een module bevat code die je in je eigen programma kunt gebruiken. Met <span class="code-inline">import</span> haal je die binnen.</p>
+            <pre><span class="keyword">import</span> random
+geheim_getal = random.randint(<span class="number">1</span>, <span class="number">100</span>)</pre>
+            <p style="margin-top: 0.5rem;">Voor ons getallenspel gebruikten we de <strong>random</strong>-module om een willekeurig getal te kiezen.</p>
+          </div>
+
+          <div class="card" id="indentation">
+            <div class="card-icon">⇥</div>
+            <h3>10. Indentation</h3>
+            <p>Inspringen is in Python heel belangrijk. Python ziet hiermee welke code bij elkaar hoort.</p>
+            <pre><span class="keyword">if</span> getal &gt; <span class="number">10</span>:
+    <span class="func">print</span>(<span class="string">'het getal is groter dan 10'</span>)
+<span class="comment"># de inspringing na de : is de indentation</span></pre>
+            <p style="margin-top: 0.5rem;">Als de indentation verkeerd is, werkt de hele code niet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. GIT -->
+    <section id="git">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">11 · Versiebeheer</div>
+          <h2>Git</h2>
+          <p>Een programma waarmee je de veranderingen in je code kunt bijhouden — een soort geschiedenis van je project.</p>
+        </div>
+
+        <div class="content-block">
+          <p>
+            In Git sla je alle codes op die je hebt gebruikt. Je kunt zien wat er veranderd is,
+            terug naar eerdere versies gaan en veilig samenwerken zonder elkaars werk te overschrijven.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. GITHUB -->
+    <section id="github">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">12 · Online platform</div>
+          <h2>GitHub</h2>
+          <p>Een online platform waar je Git-projecten kunt opslaan en delen.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>Waarom GitHub?</h3>
+          <ul style="color: var(--text-muted); padding-left: 1.2rem; margin: 0.75rem 0;">
+            <li>Je code bewaren in de cloud</li>
+            <li>Vanaf een andere computer bij je code komen</li>
+            <li>Samenwerken aan één codebase</li>
+            <li>Codes met anderen delen</li>
+          </ul>
+          <p style="margin-top: 1rem;">
+            <strong>Verschil:</strong> Git houdt de geschiedenis van je code bij op je computer.
+            GitHub is de plek waar je die Git-projecten online opslaat en deelt.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. LINUX -->
+    <section id="linux">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">13 · Terminal</div>
+          <h2>Basic Linux commands</h2>
+          <p>Commando’s die je in de terminal (bijv. via Termius / Amazon Linux) gebruikt om bestanden en mappen te beheren.</p>
+        </div>
+
+        <div class="cmd-list">
+          <div class="cmd-item">
+            <code>ls</code>
+            <p>Laat zien welke bestanden en mappen zich in de huidige map bevinden.</p>
+          </div>
+          <div class="cmd-item">
+            <code>cd</code>
+            <p>Verander van map (change directory).</p>
+          </div>
+          <div class="cmd-item">
+            <code>mkdir</code>
+            <p>Maak een nieuwe map aan. Voorbeeld: <span class="code-inline">mkdir python</span> → map met de naam “python”.</p>
+          </div>
+          <div class="cmd-item">
+            <code>touch</code>
+            <p>Maak een nieuw leeg bestand. Voorbeeld: <span class="code-inline">touch rekenmachine.py</span>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRAKTIJK -->
+    <section id="praktijk">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">In de echte wereld</div>
+          <h2>Waar kun je dit voor gebruiken?</h2>
+          <p>De programmeeronderdelen die we geleerd hebben, zijn niet alleen voor school — ze worden dagelijks gebruikt in bedrijven.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Variabelen</h3>
+            <p>Gegevens van een gebruiker opslaan, zoals naam, score of voorraad.</p>
+          </div>
+          <div class="card">
+            <h3>If / Else</h3>
+            <p>Beslissingen maken: heeft iemand genoeg geld om iets te kopen? Is de voorraad te laag?</p>
+          </div>
+          <div class="card">
+            <h3>Loops</h3>
+            <p>Iets blijven herhalen, bijvoorbeeld in een game of bij het verwerken van een lijst producten.</p>
+          </div>
+          <div class="card">
+            <h3>Input &amp; Print</h3>
+            <p>Communiceren met de gebruiker: vragen stellen en resultaten tonen.</p>
+          </div>
+          <div class="card">
+            <h3>Random</h3>
+            <p>Willekeurige gebeurtenissen in games of simulaties.</p>
+          </div>
+          <div class="card">
+            <h3>Git &amp; GitHub</h3>
+            <p>Code bewaren, versies bijhouden en samen aan projecten werken — standaard bij elke programmeur.</p>
+          </div>
+        </div>
+
+        <!-- VOORRAAD VOORBEELD -->
+        <div class="content-block" style="margin-top: 1.5rem;">
+          <h3>Praktijkvoorbeeld: voorraad beheren</h3>
+          <p>
+            In een bedrijf kun je Python gebruiken om de voorraad te meten en automatisch actie te ondernemen.
+            Simpel gezegd:
+          </p>
+          <pre>voorraad = <span class="number">500</span>  <span class="comment"># stuks</span>
+
+<span class="keyword">if</span> voorraad &lt; <span class="number">150</span>:
+    <span class="func">print</span>(<span class="string">'er is weinig voorraad'</span>)</pre>
+          <div class="real-world">
+            <h4>In een echt bedrijf</h4>
+            <p>
+              Het programma leest gegevens uit een database. Stel je begint met 500 producten.
+              Als er 400 verkocht zijn, ziet de code dat de voorraad onder de 150 komt.
+              Dan kan het systeem automatisch een e-mail sturen naar de medewerker die bestellingen doet:
+              “Er moet nieuwe voorraad besteld worden.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        Gemaakt tijdens de stage bij <a href="https://technative.eu" target="_blank" rel="noopener">TechNative</a>
+        · Python fundamentals &amp; cloud tools
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+        “Friends don’t let friends build data centres.” — TechNative
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
